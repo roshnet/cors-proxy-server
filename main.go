@@ -42,7 +42,7 @@ func main() {
 URL. However, this may throw an error if the URL is invalid.`)
 	}).Methods("GET")
 
-	r.HandleFunc("/proxy", DispatchRequest).Methods("GET")
+	// r.HandleFunc("/proxy", DispatchRequest).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8001", r))
 }
