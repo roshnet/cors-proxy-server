@@ -34,13 +34,12 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	// r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Fprintf(w, `To apply this proxy, suffix the desired URL to this
-	// 	URL. However, this may throw an error if the URL is invalid.`)
-	// }).Methods("GET")
+	r.HandleFunc("/help", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, ` To apply this proxy, suffix the desired URL to this
+URL. However, this may throw an error if the URL is invalid.`)
+	}).Methods("GET")
 
 	r.HandleFunc("/", DispatchRequest).Methods("GET")
 
-	fmt.Println("Listeing...")
 	log.Fatal(http.ListenAndServe(":8001", r))
 }
