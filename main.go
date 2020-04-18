@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -14,7 +15,6 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 	// params := mux.Vars(r) // Need to embed optional slash parsinfg in URL
 	params := r.URL.Query()
 	targetURL := params.Get("u")
-	fmt.Println("PING", targetURL) // DEV
 
 	if targetURL == "" {
 		fmt.Fprintf(w, "Target URL not specified.")
@@ -36,6 +36,11 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	r := mux.NewRouter()
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, ` To apply this proxy, suffix the desired URL to this
@@ -44,5 +49,5 @@ URL. However, this may throw an error if the URL is invalid.`)
 
 	// r.HandleFunc("/proxy", DispatchRequest).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":8001", r))
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
