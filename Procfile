@@ -1,1 +1,1 @@
-web: go-cors-proxy
+web: bin/go-cors-proxy
