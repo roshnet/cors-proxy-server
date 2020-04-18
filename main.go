@@ -43,8 +43,9 @@ func main() {
 	}
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, ` To apply this proxy, suffix the desired URL to this
-URL. However, this may throw an error if the URL is invalid.`)
+		fmt.Fprintf(w, `
+Usage: https://proxify-cors.herokuapp.com/proxy?u=&lt;desired&gt; resource
+absolute path. However, this may throw an error if the URL is invalid.`)
 	}).Methods("GET")
 
 	r.HandleFunc("/proxy", DispatchRequest).Methods("GET")
