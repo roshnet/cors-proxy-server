@@ -44,7 +44,7 @@ func main() {
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, `
-Usage: https://proxify-cors.herokuapp.com/proxy?u=&lt;desired&gt; resource
+Usage: https://proxify-cors.herokuapp.com/proxy?u=<desired-path> resource
 absolute path. However, this may throw an error if the URL is invalid.`)
 	}).Methods("GET")
 
