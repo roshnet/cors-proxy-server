@@ -44,10 +44,15 @@ func main() {
 		port = "8080"
 	}
 
+	r.
+		PathPrefix("/static/").
+		Handler(http.StripPrefix("/static/",
+			http.FileServer(http.Dir("."+"/static/"))))
+
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		htmlContent, err := ioutil.ReadFile("static/usage.html")
 		if err != nil {
-			log.Fatal("Exiting. Error reading source.")
+			log.Fatal("[EXITING]")
 		}
 		w.Write([]byte(htmlContent))
 	}).Methods("GET")
