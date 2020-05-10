@@ -31,6 +31,7 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
+	w.Header().Set("X-Frame-Options", "SAMEORIGIN")
 	w.Header().Set("Allow-Control-Allow_Origin", "*")
 	w.Write([]byte(string(body)))
 }
