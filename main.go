@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -17,8 +16,7 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 	targetURL := params.Get("u")
 
 	if targetURL == "" {
-		fmt.Fprintf(w, "Target URL not specified.")
-		log.Fatal("Exiting request. URL not specified.")
+		w.Write([]byte("Exiting request. URL not specified."))
 		return
 	}
 
@@ -27,7 +25,7 @@ func DispatchRequest(w http.ResponseWriter, r *http.Request) {
 
 	response, err := http.Get(targetURL)
 	if err != nil {
-		panic(err) // Maybe use log.Fatal() instead?
+		w.Write([]byte("Something went wrong :("))
 	}
 	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
@@ -52,7 +50,7 @@ func main() {
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		htmlContent, err := ioutil.ReadFile("static/usage.html")
 		if err != nil {
-			log.Fatal("[EXITING]")
+			w.Write([]byte("There's a runtime issue with the app :("))
 		}
 		w.Write([]byte(htmlContent))
 	}).Methods("GET")
