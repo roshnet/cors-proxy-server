@@ -44,9 +44,11 @@ func main() {
 	}
 
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`
-	Usage: https://proxify-cors.herokuapp.com/proxy?u=<desired-path> resource
-	absolute path. However, this may throw an error if the URL is invalid.`))
+		htmlContent, err := ioutil.ReadFile("static/usage.html")
+		if err != nil {
+			log.Fatal("Exiting. Error reading source.")
+		}
+		w.Write([]byte(htmlContent))
 	}).Methods("GET")
 
 	r.HandleFunc("/proxy", DispatchRequest).Methods("GET")

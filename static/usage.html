@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    h1, h2, h3 {
+      font-weight: lighter;
+    }
+    div >code >p {
+      background-color: rgb(6, 28, 102);
+      color: #0d0;
+      font-family: monospace;
+      padding: 0.5em;
+    }
+    </style>
+  <title>How to use the proxy</title>
+</head>
+<body>
+  <main>
+    <h1>Usage</h1>
+    <p>
+      https://proxify-cors.herokuapp.com/proxy?u=<desired-path> resource
+      absolute path. However, this may throw an error if the URL is invalid.
+    </p>
+    <h2>Examples</h2>
+    <p>
+      To access "https://github.com" using the proxy, use:
+      <div>
+        <code>
+          <p>
+            https://proxify-cors.herokuapp.com/proxy?u=https://github.com
+          </p>
+        </code>
+      </div>
+    </p>
+  </main>
+</body>
+</html>
