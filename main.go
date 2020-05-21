@@ -51,8 +51,9 @@ func main() {
 		htmlContent, err := ioutil.ReadFile("static/usage.html")
 		if err != nil {
 			w.Write([]byte("There's a runtime issue with the app :("))
+		} else {
+			w.Write([]byte(htmlContent))
 		}
-		w.Write([]byte(htmlContent))
 	}).Methods("GET")
 
 	r.HandleFunc("/proxy", DispatchRequest).Methods("GET")
